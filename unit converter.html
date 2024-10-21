@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Measurement Unit Converter</title>
+    </head>
+    <body>
+        <h1>Measurement Unit Converter</h1>
+        <label for="value">Enter a value: </label>
+        <input type="number" id="value" min="1" max="999" required>
+        </br>
+        <label for="unitType">Select unit conversion: </label>
+        <select id="unitType">
+            <option value="temperature">Temperature (F to C)</option>
+            <option value="weight">Weight (lbs to kgs)</option>
+            <option value="length">Length (miles to kms)</option>
+            <option value="area">Area (sq ft to sq meters)</option>
+            <option value="volume">Volume (gallons to liters)</option>
+        </select>
+        </br>
+        <button onclick="convert()">Convert Unit</button>
+        <h2 id="result" style="color: darkseagreen;"></h2>
+        <script>
+            function convert() {
+            const value =parseInt(document.getElementById("value").value);
+            const unitType =document.getElementById("unitType").value;
+            let result;
+            if (value < 1 || value > 999) {
+                result = "Please enter a value between 1 and 999";
+            } else {
+            switch (unitType) {
+            case "temperature":
+            result = fahrenheitToCelsius(value) + "°C";
+            break;
+            case "weight":
+            result = poundsToKilograms(value) + "kg";
+            break;
+            case "length":
+            result = milesToKilometers(value) + "km";
+            break;
+            case "area":
+            result = squareFeetToSquareMeters(value) + "m²";
+            break;
+            case "volume":
+            result = gallonsToLiters(value) + "L";
+            break;
+            default:
+            result = "Invalid unit type";
+            break;
+            }
+            }
+            document.getElementById("result").innerText = result;
+            }
+            function fahrenheitToCelsius(f) {
+            return ((f - 32) * 5 / 9).toFixed(0);
+            }
+            function poundsToKilograms(lbs) {
+            return (lbs * 0.453592).toFixed(0);
+            }
+            function milesToKilometers(miles) {
+            return (miles * 1.60934).toFixed(0);
+            }
+            function squareFeetToSquareMeters(sqft) {
+            return (sqft * 0.092903).toFixed(0);
+            }
+            function gallonsToLiters(gal) {
+            return (gal * 3.78541).toFixed(0);
+            }
+        </script>
+    </body>
+</html>
